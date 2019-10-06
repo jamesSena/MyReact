@@ -1,11 +1,20 @@
 import React from 'react';
 
-const BemVindo = (props) => <h2>Bem-Vindo {props.nome}</h2>
-const BemVindo2 = (props) => {
+const Equipe = (props) => {
     return (
         <div>
-            <h2>Nome: {props.nome} </h2>       
-            <h3>Idade: {props.idade}</h3>      
+            <Sobre nome={props.nome}
+                    cargo={props.cargo}
+                    idade={props.idade}
+                />
+        </div>
+
+        );
+}
+const Sobre = (props) => {
+    return (
+        <div>
+            <h2>Olá sou o {props.nome}</h2>
         </div>
 
         );
@@ -13,8 +22,7 @@ const BemVindo2 = (props) => {
 
 function App(){
     return <div>
-            <BemVindo nome="James"/>
-            <BemVindo2 nome="James" idade="27"/>
+            <Equipe nome="James" cargo="Desenvolvedor" idade="27"/>
         </div>
 }
 export default App;
