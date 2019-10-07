@@ -6,10 +6,12 @@ import Membro from './components/Membro'
         this.state = {
             nome: 'James',
             contador:0,
-            hora:'00:00:00'
+            hora:'00:00:00', 
+            status: true
         };
         this.aumentar = this.aumentar.bind(this);
         this.diminuir = this.diminuir.bind(this);
+        this.sair = this.sair.bind(this);
 
     }
     //Quando é criado o componente
@@ -24,8 +26,10 @@ import Membro from './components/Membro'
         console.log("Atualizou o state !!!!")
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-         
+    sair(){
+        let state = this.state;
+        state.status = false;
+        this.setState(state);
     }
 
     aumentar(){
@@ -49,7 +53,13 @@ import Membro from './components/Membro'
                     <button onClick={this.aumentar}>+</button>
                     <br/>
                     {this.state.hora}
-                    <Membro nome="Visitante"/>
+                    {
+                        this.state.status ? 
+                        <button onClick={this.sair}>Sair</button>
+                        :
+                        <Membro nome="Visitante" idade="10"/>
+                    }
+
                 </h3>
             </div>
         );
