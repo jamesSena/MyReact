@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Membro from './components/Membro'
+import Membro from './components/Membro';
+import Feed from './components/Feed';
+
  class App extends Component {
     constructor(props){
         super(props);
@@ -7,12 +9,24 @@ import Membro from './components/Membro'
             nome: 'James',
             contador:0,
             hora:'00:00:00', 
-            status: true
+            status: true,
+            feed:[
+                {id:1, username:'james', curtidas:10, comentarios:2},
+                {id:2, username:'pedro', curtidas:3, comentarios:5},
+                {id:3, username:'edu', curtidas:6, comentarios:7}
+
+            ],
+            email:'email@email',
+            senha:''
         };
         this.aumentar = this.aumentar.bind(this);
         this.diminuir = this.diminuir.bind(this);
         this.sair = this.sair.bind(this);
-
+        this.trocaEmail = this.trocaEmail.bind(this);
+    }
+    trocaEmail(event){
+        let valorDigitado = event.target.value;
+        this.setState({email:valorDigitado})
     }
     //Quando é criado o componente
     componentDidMount(){
@@ -43,10 +57,26 @@ import Membro from './components/Membro'
         state.contador -=1;
         this.setState(state);
     }
+
+
+
     render(){
         return (
             <div>
-                <h1>Contador</h1>
+                <h1>TESTE</h1>
+
+                Email:
+                <input type="email" name="email" value={this.state.email} onChange={this.trocaEmail}/>
+<br/>
+                Senha:
+                <input type="password" name="password"/>
+
+
+                {this.state.feed.map((item)=>{
+                    return(
+                        <Feed id={item.id} username={item.username} curtidas={item.curtidas} comentarios={item.comentarios}/>
+                    );
+                })}
                 <h3>
                     <button onClick={this.diminuir}>-</button>
                     {this.state.contador}
